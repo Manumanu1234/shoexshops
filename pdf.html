@@ -1,0 +1,41 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Hello world!</title>
+<style>
+    table, th, td {
+  border: 2px solid black;
+}
+</style>
+</head>
+
+<body>
+    <h1 style="text-align: center;">TOTAL ORDERS</h1>
+    <div  class="container">
+
+        <table style="width:100% "  >
+            <thead>
+                <tr style="font-size: large;">
+                    <th >Name Address and Number</th>
+                    <th>Date And Time</th>
+                    <th>Payment Method</th>
+                    <th>totalamount</th>
+                   
+                </tr>
+            </thead>
+            <tbody>
+                {{#each users }}
+                <tr style="text-align: center; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+                    <td>{{this.Name}},{{this.Address}}<br>{{this.Number}}</td>
+                    <td>{{this.date}}</td>
+                    <td>{{this.Paymentmethod}}</td>
+                    <td>{{this.totalamount}}</td>
+                </tr>
+                {{/each}}
+        </table>
+    </div>
+
+</body>
+
+</html>

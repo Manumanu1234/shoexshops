@@ -1,0 +1,1372 @@
+{{#if noadressfound}}
+<style>
+  <style>.ava-modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  }
+
+  .ava-modal>* {
+    box-sizing: border-box;
+
+
+  }
+
+  .ava-alert {
+    background-color: white;
+    width: 80%;
+    text-align: right;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri;
+    font-weight: 900;
+    animation: 25s 1 ava_alert_animation;
+    -webkit-animation: 0.5s 1 ava_alert_animation;
+  }
+
+  @media (min-width: 650px) {
+    .ava-alert {
+      width: 500px;
+      height: 300px;
+    }
+  }
+
+  @keyframes ava_alert_animation {
+    from {
+      transform: scale(0.5);
+    }
+
+    50% {
+      transform: scale(1.1);
+    }
+
+    to {
+      transform: scale(1);
+    }
+  }
+
+  .ava-alert .ava-progress-bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+    background-color: rgba(0, 0, 0, 0.04);
+    animation-name: progressBarAnimation;
+    -webkit-animation-name: progressBarAnimation;
+  }
+
+  .ava-alert .ava-text-con {
+    position: relative;
+  }
+
+  @keyframes progressBarAnimation {
+    from {
+      width: 0%;
+    }
+
+    to {
+      width: 100%;
+    }
+  }
+
+  .ava-alert__icon {
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+
+    box-shadow: inset 0px -5px 7px rgba(0, 0, 0, 0.3);
+  }
+
+  .ava-alert__text {
+    padding: 15px;
+    line-height: 1.5em;
+    color: #8a8a8a;
+    font-size: 30px;
+
+  }
+
+  .ava-alert__btn {
+    width: 70px;
+    padding: 7px 0px;
+    display: block;
+    margin: auto;
+    margin-bottom: 13px;
+    border-radius: 0;
+    border: 0;
+    background-color: #dfdfdf;
+    color: #b1b1b1;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .ava-toast {
+    position: fixed;
+    box-shadow: 0px 5px 7px rgba(175, 91, 249, 0.1);
+    width: 250px;
+    height: 120px;
+    margin-right: 30px;
+    margin-top: 190px;
+    display: flex;
+    flex-direction: row;
+    background-color: #fff;
+  }
+
+  .ava-toast svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .ava-toast .ava-alert__icon {
+    padding: 0 10px;
+    box-shadow: none;
+  }
+
+  .ava-toast .ava-text-con {
+    width: 100%;
+  }
+
+  .ava-toast .ava-alert__btn {
+    margin: 0;
+  }
+
+  .ava-toast .ava-alert__text {
+    font-size: x-large;
+    padding: 5px;
+    width: 100%;
+  }
+
+  .svg-box {
+    display: inline-block;
+    position: relative;
+    width: 150px;
+  }
+
+  .ava-text-con {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .green-stroke {
+    stroke: #ffffff;
+  }
+
+  .red-stroke {
+    stroke: #ffffff;
+  }
+
+  .yellow-stroke {
+    stroke: #ffffff;
+  }
+
+  .circular circle.path {
+    stroke-dasharray: 330;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+    opacity: 0.4;
+    animation: 0.7s draw-circle ease-out;
+  }
+
+  /*------- Checkmark ---------*/
+  .checkmark {
+    stroke-width: 6.25;
+    stroke-linecap: round;
+    position: absolute;
+    top: 56px;
+    left: 49px;
+    width: 52px;
+    height: 40px;
+  }
+
+  .checkmark path {
+    animation: 1s draw-check ease-out;
+  }
+
+  @keyframes draw-circle {
+    0% {
+      stroke-dasharray: 0, 330;
+      stroke-dashoffset: 0;
+      opacity: 1;
+    }
+
+    80% {
+      stroke-dasharray: 330, 330;
+      stroke-dashoffset: 0;
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0.4;
+    }
+  }
+
+  @keyframes draw-check {
+    0% {
+      stroke-dasharray: 49, 80;
+      stroke-dashoffset: 48;
+      opacity: 0;
+    }
+
+    50% {
+      stroke-dasharray: 49, 80;
+      stroke-dashoffset: 48;
+      opacity: 1;
+    }
+
+    100% {
+      stroke-dasharray: 130, 80;
+      stroke-dashoffset: 48;
+    }
+  }
+
+  /*---------- Cross ----------*/
+  .cross {
+    stroke-width: 6.25;
+    stroke-linecap: round;
+    position: absolute;
+    top: 54px;
+    left: 54px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .cross .first-line {
+    animation: 0.7s draw-first-line ease-out;
+  }
+
+  .cross .second-line {
+    animation: 0.7s draw-second-line ease-out;
+  }
+
+  @keyframes draw-first-line {
+    0% {
+      stroke-dasharray: 0, 56;
+      stroke-dashoffset: 0;
+    }
+
+    50% {
+      stroke-dasharray: 0, 56;
+      stroke-dashoffset: 0;
+    }
+
+    100% {
+      stroke-dasharray: 56, 330;
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes draw-second-line {
+    0% {
+      stroke-dasharray: 0, 55;
+      stroke-dashoffset: 1;
+    }
+
+    50% {
+      stroke-dasharray: 0, 55;
+      stroke-dashoffset: 1;
+    }
+
+    100% {
+      stroke-dasharray: 55, 0;
+      stroke-dashoffset: 70;
+    }
+  }
+
+  .alert-sign {
+    stroke-width: 6.25;
+    stroke-linecap: round;
+    position: absolute;
+    top: 40px;
+    left: 68px;
+    width: 15px;
+    height: 70px;
+    animation: 0.5s alert-sign-bounce cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .alert-sign .dot {
+    stroke: none;
+    fill: #ffffff;
+  }
+</style>
+{{/if}}
+
+{{#if newupload}}
+<style>
+  <style>.ava-modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  }
+
+  .ava-modal>* {
+    box-sizing: border-box;
+
+
+  }
+
+  .ava-alert {
+    background-color: white;
+    width: 80%;
+    text-align: right;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri;
+    font-weight: 900;
+    animation: 25s 1 ava_alert_animation;
+    -webkit-animation: 0.5s 1 ava_alert_animation;
+  }
+
+  @media (min-width: 650px) {
+    .ava-alert {
+      width: 500px;
+      height: 300px;
+    }
+  }
+
+  @keyframes ava_alert_animation {
+    from {
+      transform: scale(0.5);
+    }
+
+    50% {
+      transform: scale(1.1);
+    }
+
+    to {
+      transform: scale(1);
+    }
+  }
+
+  .ava-alert .ava-progress-bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+    background-color: rgba(0, 0, 0, 0.04);
+    animation-name: progressBarAnimation;
+    -webkit-animation-name: progressBarAnimation;
+  }
+
+  .ava-alert .ava-text-con {
+    position: relative;
+  }
+
+  @keyframes progressBarAnimation {
+    from {
+      width: 0%;
+    }
+
+    to {
+      width: 100%;
+    }
+  }
+
+  .ava-alert__icon {
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+
+    box-shadow: inset 0px -5px 7px rgba(0, 0, 0, 0.3);
+  }
+
+  .ava-alert__text {
+    padding: 15px;
+    line-height: 1.5em;
+    color: #8a8a8a;
+    font-size: 30px;
+
+  }
+
+  .ava-alert__btn {
+    width: 70px;
+    padding: 7px 0px;
+    display: block;
+    margin: auto;
+    margin-bottom: 13px;
+    border-radius: 0;
+    border: 0;
+    background-color: #dfdfdf;
+    color: #b1b1b1;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .ava-toast {
+    position: fixed;
+    box-shadow: 0px 5px 7px rgba(175, 91, 249, 0.1);
+    width: 250px;
+    height: 120px;
+    margin-right: 30px;
+    margin-top: 190px;
+    display: flex;
+    flex-direction: row;
+    background-color: #fff;
+  }
+
+  .ava-toast svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .ava-toast .ava-alert__icon {
+    padding: 0 10px;
+    box-shadow: none;
+  }
+
+  .ava-toast .ava-text-con {
+    width: 100%;
+  }
+
+  .ava-toast .ava-alert__btn {
+    margin: 0;
+  }
+
+  .ava-toast .ava-alert__text {
+    font-size: x-large;
+    padding: 5px;
+    width: 100%;
+  }
+
+  .svg-box {
+    display: inline-block;
+    position: relative;
+    width: 150px;
+  }
+
+  .ava-text-con {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .green-stroke {
+    stroke: #ffffff;
+  }
+
+  .red-stroke {
+    stroke: #ffffff;
+  }
+
+  .yellow-stroke {
+    stroke: #ffffff;
+  }
+
+  .circular circle.path {
+    stroke-dasharray: 330;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+    opacity: 0.4;
+    animation: 0.7s draw-circle ease-out;
+  }
+
+  /*------- Checkmark ---------*/
+  .checkmark {
+    stroke-width: 6.25;
+    stroke-linecap: round;
+    position: absolute;
+    top: 56px;
+    left: 49px;
+    width: 52px;
+    height: 40px;
+  }
+
+  .checkmark path {
+    animation: 1s draw-check ease-out;
+  }
+
+  @keyframes draw-circle {
+    0% {
+      stroke-dasharray: 0, 330;
+      stroke-dashoffset: 0;
+      opacity: 1;
+    }
+
+    80% {
+      stroke-dasharray: 330, 330;
+      stroke-dashoffset: 0;
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0.4;
+    }
+  }
+
+  @keyframes draw-check {
+    0% {
+      stroke-dasharray: 49, 80;
+      stroke-dashoffset: 48;
+      opacity: 0;
+    }
+
+    50% {
+      stroke-dasharray: 49, 80;
+      stroke-dashoffset: 48;
+      opacity: 1;
+    }
+
+    100% {
+      stroke-dasharray: 130, 80;
+      stroke-dashoffset: 48;
+    }
+  }
+
+  /*---------- Cross ----------*/
+  .cross {
+    stroke-width: 6.25;
+    stroke-linecap: round;
+    position: absolute;
+    top: 54px;
+    left: 54px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .cross .first-line {
+    animation: 0.7s draw-first-line ease-out;
+  }
+
+  .cross .second-line {
+    animation: 0.7s draw-second-line ease-out;
+  }
+
+  @keyframes draw-first-line {
+    0% {
+      stroke-dasharray: 0, 56;
+      stroke-dashoffset: 0;
+    }
+
+    50% {
+      stroke-dasharray: 0, 56;
+      stroke-dashoffset: 0;
+    }
+
+    100% {
+      stroke-dasharray: 56, 330;
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes draw-second-line {
+    0% {
+      stroke-dasharray: 0, 55;
+      stroke-dashoffset: 1;
+    }
+
+    50% {
+      stroke-dasharray: 0, 55;
+      stroke-dashoffset: 1;
+    }
+
+    100% {
+      stroke-dasharray: 55, 0;
+      stroke-dashoffset: 70;
+    }
+  }
+
+  .alert-sign {
+    stroke-width: 6.25;
+    stroke-linecap: round;
+    position: absolute;
+    top: 40px;
+    left: 68px;
+    width: 15px;
+    height: 70px;
+    animation: 0.5s alert-sign-bounce cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .alert-sign .dot {
+    stroke: none;
+    fill: #ffffff;
+  }
+</style>
+{{/if}}
+
+
+
+
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">{{username}}</span><span class="text-black-50">{{email}}</span><span> </span></div>
+          <button style="position:absolute; top: 300px;right: 80px; width: 120px;" onclick="logutformindex()" class="form-control btn btn-primary mt-5 text-center">Logout</button>
+                
+        </div>
+        <div class="col-md-9 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Profile Settings</h4>
+                </div>
+                <form action="/userprofile" method="post">
+
+
+
+                 <div class="form-group row">
+                <div class="col-md-6">
+                  <label for="c_fname"  class="text-black">First Name <span class="text-danger">*</span></label>
+                  <input required type="text" class="form-control" id="c_fname" name="c_fname">
+                </div>
+                <div class="col-md-6">
+                  <label for="c_lname" class="text-black">Last Name <span class="text-danger">*</span></label>
+                  <input required type="text" class="form-control" id="c_lname" name="c_lname">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-md-12">
+                  <label for="c_companyname" class="text-black">Company Name </label>
+                  <input type="text" class="form-control" id="c_companyname" name="c_companyname" placeholder="optional">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-md-12">
+                  <label for="c_address"  class="text-black">Address <span class="text-danger">*</span></label>
+                  <input type="text" required class="form-control" id="c_address" name="c_address" placeholder="Street address">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <input type="text" name="streetadress" class="form-control" placeholder="Apartment, suite, unit etc. (optional)">
+              </div>
+
+              <div class="form-group row">
+                <div class="col-md-6">
+                  <label for="c_state_country"  class="text-black">State / Country <span class="text-danger">*</span></label>
+                    <div class="form-group">
+                      <select required id="c_diff_country" name="state/country" class="form-control">
+                        <option value="1">Select a country</option>    
+                        <option value="bangladesh">bangladesh</option>    
+                        <option value="Algeria">Algeria</option>    
+                        <option value="Afghanistan">Afghanistan</option>    
+                        <option value="Ghana">Ghana</option>    
+                        <option value="Albania">Albania</option>    
+                        <option value="Bahrain">Bahrain</option>    
+                        <option value="Colombia">Colombia</option>    
+                        <option value="Dominican Republic">Dominican Republic</option>    
+                      </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                  <label for="c_postal_zip" class="text-black">Post office/pincode <span class="text-danger">*</span></label>
+                  <input type="text" required class="form-control" id="c_postal_zip" name="c_postal_zip">
+                </div>
+              </div>
+
+              <div class="form-group row mb-5">
+                <div class="col-md-6">
+                  <label for="c_email_address" class="text-black">Email Address <span class="text-danger">*</span></label>
+                  <input type="text" required class="form-control" id="c_email_address" name="c_email_address">
+                </div>
+                <div class="col-md-6">
+                  <label for="c_phone" class="text-black">Phone <span class="text-danger">*</span></label>
+                  <input type="text" required class="form-control" id="c_phone" name="c_phone" placeholder="Phone Number">
+                </div>
+              </div>
+
+
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
+            </div>
+            </form>
+        </div>
+      
+    </div>
+ 
+   
+              
+</div>
+</div>
+</div>
+
+{{#if noadressfound}}
+<script>
+
+
+  const ava = ({ icon = 'success', toast = false, progressBar = true, text = null, timer = 10000, btnText = 'Okay', direction = 'rtl', position = 'top-right' }) => {
+    const modal = document.createElement('section');
+    modal.setAttribute('class', 'ava-modal');
+    document.body.appendChild(modal);
+    const alert = document.createElement('div');
+    alert.setAttribute('class', 'ava-alert');
+    modal.appendChild(alert);
+    var avaIcon;
+    if (icon == 'success' && toast == false) {
+      avaIcon = `
+                <div class="ava-alert__icon" style="background: #438C5E;">
+                <div class="svg-box">
+                    <svg class="circular green-stroke">
+                    <circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="5" stroke-miterlimit="10"/>
+                </svg>
+                <svg class="checkmark green-stroke">
+                    <g transform="matrix(0.79961,8.65821e-32,8.39584e-32,0.79961,-489.57,-205.679)">
+                        <path class="checkmark__check" fill="none" d="M616.306,283.025L634.087,300.805L673.361,261.53"/>
+                    </g>
+                </svg>
+                </div>
+            </div>
+              `;
+
+    } else if (icon == 'info' && toast == false) {
+      avaIcon = `
+                <div class="ava-alert__icon" style="background: #434D8C;">
+                <div class="svg-box">
+                    <svg class="circular yellow-stroke">
+                        <circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="5"
+                            stroke-miterlimit="10" />
+                    </svg>
+                    <svg class="alert-sign yellow-stroke">
+                        <g transform="matrix(1,0,0,1,-615.516,-257.346)">
+                            <g transform="matrix(0.56541,-0.56541,0.56541,0.56541,93.7153,495.69)">
+                                <path class="line" d="M634.087,300.805L673.361,261.53" fill="none" />
+                            </g>
+                            <g transform="matrix(2.27612,-2.46519e-32,0,2.27612,-792.339,-404.147)">
+                                <circle class="dot" cx="621.52" cy="316.126" r="1.318" />
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+              `;
+
+    } else if (icon == 'danger' && toast == false) {
+      avaIcon = `
+                <div class="ava-alert__icon" style="background: #8C4343;">
+                <div class="svg-box">
+                    <svg class="circular red-stroke">
+                    <circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="5" stroke-miterlimit="10"/>
+                </svg>
+                <svg class="cross red-stroke">
+                    <g transform="matrix(0.79961,8.65821e-32,8.39584e-32,0.79961,-502.652,-204.518)">
+                        <path class="first-line" d="M634.087,300.805L673.361,261.53" fill="none"/>
+                    </g>
+                    <g transform="matrix(-1.28587e-16,-0.79961,0.79961,-1.28587e-16,-204.752,543.031)">
+                        <path class="second-line" d="M634.087,300.805L673.361,261.53"/>
+                    </g>
+                </svg>
+                </div>
+            </div>
+              `;
+
+    } else if (icon == 'info' && toast == true) {
+      avaIcon = `
+                    <div class="ava-alert__icon" style="background: #434D8C;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="8" stroke-dashoffset="8" d="M12 7V13"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="8;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>
+            </div>
+                    `;
+      btnText = '';
+    } else if (icon == 'success' && toast == true) {
+      avaIcon = `
+                    <div class="ava-alert__icon" style="background: #8F99FB;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="14" stroke-dashoffset="14" d="M8 12L11 15L16 10"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="14;0"/></path></g></svg>
+            </div>
+                    `;
+      btnText = '';
+    } else if (icon == 'danger' && toast == true) {
+      avaIcon = `
+                    <div class="ava-alert__icon" style="background: #8C4343;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="8" stroke-dashoffset="8" d="M12 12L16 16M12 12L8 8M12 12L8 16M12 12L16 8"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="8;0"/></path></g></svg>
+            </div>
+                    `;
+      btnText = '';
+    } else if (toast == true && icon == 'none') {
+      avaIcon = '';
+      btnText = '';
+    } else if (toast == false && icon == 'none') {
+      avaIcon = '';
+    }
+    document.querySelector('.ava-alert').innerHTML = `
+          ${avaIcon}
+<div class='ava-text-con'>
+            <p class="ava-alert__text">
+            ${text}
+            </p>
+            <button class="ava-alert__btn">${btnText}</button>
+        </div>
+            `;
+    var new_timer_format = '';
+    switch (timer) {
+      case 1000:
+        new_timer_format = '1s';
+        break;
+      case 2000:
+        new_timer_format = '2s';
+        break;
+      case 3000:
+        new_timer_format = '3s';
+        break;
+      case 4000:
+        new_timer_format = '4s';
+        break;
+      case 5000:
+        new_timer_format = '5s';
+        break;
+      case 6000:
+        new_timer_format = '6s';
+        break;
+      case 7000:
+        new_timer_format = '7s';
+        break;
+      case 8000:
+        new_timer_format = '8s';
+        break;
+      case 9000:
+        new_timer_format = '9s';
+        break;
+      case 10000:
+        new_timer_format = '10s';
+        break;
+      default:
+        new_timer_format = '4s';
+    }
+    if (timer > 10000) {
+      timer = 4000;
+    }
+    if (toast == true) {
+      modal.style = 'background-color: rgba(0, 0, 0, 0);';
+      alert.classList.add('ava-toast');
+      if (progressBar == false) {
+        document.querySelector('.ava-alert__btn').remove();
+      } else {
+        document.querySelector('.ava-alert__btn').style = 'width: 100%; padding: 2px;'
+      }
+      switch (position) {
+        case 'top-right':
+          alert.style = `
+                    top: 10px;
+                    right: 10px;
+                    `;
+          break;
+        case 'top-left':
+          alert.style = `
+                    top: 10px;
+                    left: 10px;
+                    `;
+          break;
+        case 'bottom-left':
+          alert.style = `
+                        bottom: 10px;
+                        left: 10px;
+                    `;
+          break;
+        case 'bottom-right':
+          alert.style = `
+                        bottom: 10px;
+                    right: 10px;
+                    `;
+          break;
+      }
+    }
+    if (progressBar == true) {
+      const progressBar_el = document.createElement('div');
+      progressBar_el.setAttribute('class', 'ava-progress-bar');
+      document.querySelector('.ava-alert__btn').appendChild(progressBar_el);
+      document.querySelector('.ava-progress-bar').style = `
+                animation-duration: ${new_timer_format};
+        -webkit-animation-duration: ${new_timer_format};
+                `;
+    }
+
+    if (progressBar == true) {
+      setTimeout(() => {
+        modal.remove();
+        alert.remove();
+      }, timer);
+    } else if (progressBar == false && toast == true) {
+      setTimeout(() => {
+        modal.remove();
+        alert.remove();
+      }, timer);
+    }
+    if (direction == 'rtl' && toast == true) {
+      document.querySelector('.ava-modal > *').style.direction = 'rtl';
+      document.querySelector('.ava-modal > *').style.textAlign = 'right';
+      document.querySelector('.ava-alert__btn').style.direction = 'rtl';
+    } else if (direction == 'ltr' && toast == true) {
+      document.querySelector('.ava-modal > *').style.direction = 'ltr';
+      document.querySelector('.ava-modal > *').style.textAlign = 'left';
+      document.querySelector('.ava-alert__btn').style.direction = 'ltr';
+    } else {
+      document.querySelector('.ava-modal > *').style.textAlign = 'center';
+    }
+    document.querySelector('.ava-alert__btn').addEventListener('click', function () {
+      alert.remove();
+      modal.remove();
+    })
+    window.addEventListener('click', function (e) {
+      if (e.target == document.querySelector('.ava-modal')) {
+        modal.remove();
+        alert.remove();
+      }
+
+    })
+  }
+
+
+
+
+
+
+
+
+
+  function info() {
+    ava({
+      icon: 'info',
+      text: 'This is a Info Alert',
+      btnText: 'Okay',
+      progressBar: true,
+      toast: false,
+    });
+  }
+  function success() {
+    ava({
+      icon: 'success',
+      text: 'Product Added Succesfully',
+      btnText: 'Okay',
+      progressBar: true,
+      toast: false,
+    });
+  }
+  function danger() {
+    ava({
+      icon: 'danger',
+      text: 'This is a Danger Alert',
+      btnText: 'Okay',
+      progressBar: true,
+      toast: false,
+    });
+  }
+
+  function white() {
+    ava({
+      icon: 'none',
+      text: 'This is a Simple Alert',
+      btnText: 'Okay',
+      progressBar: true,
+      toast: false,
+      timer: 8000
+    });
+  }
+
+
+  function Toast_info() {
+    ava({
+      icon: 'info',
+      text: 'You need to upload your Address First',
+      btnText: '',
+      progressBar: true,
+      toast: true,
+      position: 'top-right',
+      direction: 'ltr',
+      timer: 4000
+    });
+  }
+
+
+  function Toast_success() {
+    ava({
+      icon: 'success',
+      text: 'New Address Uploaded',
+      btnText: '',
+      progressBar: true,
+      toast: true,
+      position: 'top-right',
+      direction: 'ltr',
+      timer: 4000
+    });
+  }
+
+
+  function Toast_danger() {
+    ava({
+      icon: 'danger',
+      text: 'This is a Toast danger Alert',
+      btnText: '',
+      progressBar: true,
+      toast: true,
+      position: 'top-right',
+      direction: 'ltr',
+      timer: 4000
+    });
+  }
+
+  function Toast_white() {
+    ava({
+      icon: 'none',
+      text: 'This is a Toast simple Alert',
+      btnText: '',
+      progressBar: true,
+      toast: true,
+      position: 'top-right',
+      direction: 'ltr',
+      timer: 4000
+    });
+  }
+
+
+</script>
+{{/if}}
+{{#if noadressfound}}
+  <script>
+    Toast_info();
+  </script>
+{{/if}}
+
+
+{{#if newupload}}
+<script>
+
+
+  const ava = ({ icon = 'success', toast = false, progressBar = true, text = null, timer = 10000, btnText = 'Okay', direction = 'rtl', position = 'top-right' }) => {
+    const modal = document.createElement('section');
+    modal.setAttribute('class', 'ava-modal');
+    document.body.appendChild(modal);
+    const alert = document.createElement('div');
+    alert.setAttribute('class', 'ava-alert');
+    modal.appendChild(alert);
+    var avaIcon;
+    if (icon == 'success' && toast == false) {
+      avaIcon = `
+                <div class="ava-alert__icon" style="background: #438C5E;">
+                <div class="svg-box">
+                    <svg class="circular green-stroke">
+                    <circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="5" stroke-miterlimit="10"/>
+                </svg>
+                <svg class="checkmark green-stroke">
+                    <g transform="matrix(0.79961,8.65821e-32,8.39584e-32,0.79961,-489.57,-205.679)">
+                        <path class="checkmark__check" fill="none" d="M616.306,283.025L634.087,300.805L673.361,261.53"/>
+                    </g>
+                </svg>
+                </div>
+            </div>
+              `;
+
+    } else if (icon == 'info' && toast == false) {
+      avaIcon = `
+                <div class="ava-alert__icon" style="background: #434D8C;">
+                <div class="svg-box">
+                    <svg class="circular yellow-stroke">
+                        <circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="5"
+                            stroke-miterlimit="10" />
+                    </svg>
+                    <svg class="alert-sign yellow-stroke">
+                        <g transform="matrix(1,0,0,1,-615.516,-257.346)">
+                            <g transform="matrix(0.56541,-0.56541,0.56541,0.56541,93.7153,495.69)">
+                                <path class="line" d="M634.087,300.805L673.361,261.53" fill="none" />
+                            </g>
+                            <g transform="matrix(2.27612,-2.46519e-32,0,2.27612,-792.339,-404.147)">
+                                <circle class="dot" cx="621.52" cy="316.126" r="1.318" />
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+              `;
+
+    } else if (icon == 'danger' && toast == false) {
+      avaIcon = `
+                <div class="ava-alert__icon" style="background: #8C4343;">
+                <div class="svg-box">
+                    <svg class="circular red-stroke">
+                    <circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="5" stroke-miterlimit="10"/>
+                </svg>
+                <svg class="cross red-stroke">
+                    <g transform="matrix(0.79961,8.65821e-32,8.39584e-32,0.79961,-502.652,-204.518)">
+                        <path class="first-line" d="M634.087,300.805L673.361,261.53" fill="none"/>
+                    </g>
+                    <g transform="matrix(-1.28587e-16,-0.79961,0.79961,-1.28587e-16,-204.752,543.031)">
+                        <path class="second-line" d="M634.087,300.805L673.361,261.53"/>
+                    </g>
+                </svg>
+                </div>
+            </div>
+              `;
+
+    } else if (icon == 'info' && toast == true) {
+      avaIcon = `
+                    <div class="ava-alert__icon" style="background: #434D8C;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="8" stroke-dashoffset="8" d="M12 7V13"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="8;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>
+            </div>
+                    `;
+      btnText = '';
+    } else if (icon == 'success' && toast == true) {
+      avaIcon = `
+                    <div class="ava-alert__icon" style="background: #61bc3a;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="14" stroke-dashoffset="14" d="M8 12L11 15L16 10"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="14;0"/></path></g></svg>
+            </div>
+                    `;
+      btnText = '';
+    } else if (icon == 'danger' && toast == true) {
+      avaIcon = `
+                    <div class="ava-alert__icon" style="background: #8C4343;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="8" stroke-dashoffset="8" d="M12 12L16 16M12 12L8 8M12 12L8 16M12 12L16 8"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="8;0"/></path></g></svg>
+            </div>
+                    `;
+      btnText = '';
+    } else if (toast == true && icon == 'none') {
+      avaIcon = '';
+      btnText = '';
+    } else if (toast == false && icon == 'none') {
+      avaIcon = '';
+    }
+    document.querySelector('.ava-alert').innerHTML = `
+          ${avaIcon}
+<div class='ava-text-con'>
+            <p class="ava-alert__text">
+            ${text}
+            </p>
+            <button class="ava-alert__btn">${btnText}</button>
+        </div>
+            `;
+    var new_timer_format = '';
+    switch (timer) {
+      case 1000:
+        new_timer_format = '1s';
+        break;
+      case 2000:
+        new_timer_format = '2s';
+        break;
+      case 3000:
+        new_timer_format = '3s';
+        break;
+      case 4000:
+        new_timer_format = '4s';
+        break;
+      case 5000:
+        new_timer_format = '5s';
+        break;
+      case 6000:
+        new_timer_format = '6s';
+        break;
+      case 7000:
+        new_timer_format = '7s';
+        break;
+      case 8000:
+        new_timer_format = '8s';
+        break;
+      case 9000:
+        new_timer_format = '9s';
+        break;
+      case 10000:
+        new_timer_format = '10s';
+        break;
+      default:
+        new_timer_format = '4s';
+    }
+    if (timer > 10000) {
+      timer = 4000;
+    }
+    if (toast == true) {
+      modal.style = 'background-color: rgba(0, 0, 0, 0);';
+      alert.classList.add('ava-toast');
+      if (progressBar == false) {
+        document.querySelector('.ava-alert__btn').remove();
+      } else {
+        document.querySelector('.ava-alert__btn').style = 'width: 100%; padding: 2px;'
+      }
+      switch (position) {
+        case 'top-right':
+          alert.style = `
+                    top: 10px;
+                    right: 10px;
+                    `;
+          break;
+        case 'top-left':
+          alert.style = `
+                    top: 10px;
+                    left: 10px;
+                    `;
+          break;
+        case 'bottom-left':
+          alert.style = `
+                        bottom: 10px;
+                        left: 10px;
+                    `;
+          break;
+        case 'bottom-right':
+          alert.style = `
+                        bottom: 10px;
+                    right: 10px;
+                    `;
+          break;
+      }
+    }
+    if (progressBar == true) {
+      const progressBar_el = document.createElement('div');
+      progressBar_el.setAttribute('class', 'ava-progress-bar');
+      document.querySelector('.ava-alert__btn').appendChild(progressBar_el);
+      document.querySelector('.ava-progress-bar').style = `
+                animation-duration: ${new_timer_format};
+        -webkit-animation-duration: ${new_timer_format};
+                `;
+    }
+
+    if (progressBar == true) {
+      setTimeout(() => {
+        modal.remove();
+        alert.remove();
+      }, timer);
+    } else if (progressBar == false && toast == true) {
+      setTimeout(() => {
+        modal.remove();
+        alert.remove();
+      }, timer);
+    }
+    if (direction == 'rtl' && toast == true) {
+      document.querySelector('.ava-modal > *').style.direction = 'rtl';
+      document.querySelector('.ava-modal > *').style.textAlign = 'right';
+      document.querySelector('.ava-alert__btn').style.direction = 'rtl';
+    } else if (direction == 'ltr' && toast == true) {
+      document.querySelector('.ava-modal > *').style.direction = 'ltr';
+      document.querySelector('.ava-modal > *').style.textAlign = 'left';
+      document.querySelector('.ava-alert__btn').style.direction = 'ltr';
+    } else {
+      document.querySelector('.ava-modal > *').style.textAlign = 'center';
+    }
+    document.querySelector('.ava-alert__btn').addEventListener('click', function () {
+      alert.remove();
+      modal.remove();
+    })
+    window.addEventListener('click', function (e) {
+      if (e.target == document.querySelector('.ava-modal')) {
+        modal.remove();
+        alert.remove();
+      }
+
+    })
+  }
+
+
+
+
+
+
+
+
+
+  function info() {
+    ava({
+      icon: 'info',
+      text: 'This is a Info Alert',
+      btnText: 'Okay',
+      progressBar: true,
+      toast: false,
+    });
+  }
+  function success() {
+    ava({
+      icon: 'success',
+      text: 'Product Added Succesfully',
+      btnText: 'Okay',
+      progressBar: true,
+      toast: false,
+    });
+  }
+  function danger() {
+    ava({
+      icon: 'danger',
+      text: 'This is a Danger Alert',
+      btnText: 'Okay',
+      progressBar: true,
+      toast: false,
+    });
+  }
+
+  function white() {
+    ava({
+      icon: 'none',
+      text: 'This is a Simple Alert',
+      btnText: 'Okay',
+      progressBar: true,
+      toast: false,
+      timer: 8000
+    });
+  }
+
+
+  function Toast_info() {
+    ava({
+      icon: 'info',
+      text: 'You need to upload your Address First',
+      btnText: '',
+      progressBar: true,
+      toast: true,
+      position: 'top-right',
+      direction: 'ltr',
+      timer: 4000
+    });
+  }
+
+
+  function Toast_success() {
+    ava({
+      icon: 'success',
+      text: 'New Address Uploaded',
+      btnText: '',
+      progressBar: true,
+      toast: true,
+      position: 'top-right',
+      direction: 'ltr',
+      timer: 4000
+    });
+  }
+
+
+  function Toast_danger() {
+    ava({
+      icon: 'danger',
+      text: 'This is a Toast danger Alert',
+      btnText: '',
+      progressBar: true,
+      toast: true,
+      position: 'top-right',
+      direction: 'ltr',
+      timer: 4000
+    });
+  }
+
+  function Toast_white() {
+    ava({
+      icon: 'none',
+      text: 'This is a Toast simple Alert',
+      btnText: '',
+      progressBar: true,
+      toast: true,
+      position: 'top-right',
+      direction: 'ltr',
+      timer: 4000
+    });
+  }
+
+
+</script>
+{{/if}}
+
+
+{{#if newupload}}
+<script>
+  Toast_success()
+</script>
+{{/if}}

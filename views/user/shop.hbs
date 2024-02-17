@@ -1,0 +1,963 @@
+<style>
+
+.ava-modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.ava-modal > * {
+  box-sizing: border-box;
+ 
+  
+}
+
+.ava-alert {
+  background-color: white;
+  width: 80%;
+  text-align: right;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri;
+  font-weight: 900;
+  animation: 25s 1 ava_alert_animation;
+  -webkit-animation: 0.5s 1 ava_alert_animation;
+}
+
+@media (min-width: 650px) {
+  .ava-alert {
+    width: 500px;
+    height: 300px;
+  }
+}
+
+@keyframes ava_alert_animation {
+  from {
+    transform: scale(0.5);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.ava-alert .ava-progress-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  
+  background-color: rgba(0, 0, 0, 0.04);
+  animation-name: progressBarAnimation;
+  -webkit-animation-name: progressBarAnimation;
+}
+
+.ava-alert .ava-text-con {
+  position: relative;
+}
+
+@keyframes progressBarAnimation {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.ava-alert__icon {
+  padding: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  
+  box-shadow: inset 0px -5px 7px rgba(0, 0, 0, 0.3);
+}
+
+.ava-alert__text {
+  padding: 15px;
+  line-height: 1.5em;
+  color: #8a8a8a;
+  font-size: 30px;
+  
+}
+
+.ava-alert__btn {
+  width: 70px;
+  padding: 7px 0px;
+  display: block;
+  margin: auto;
+  margin-bottom: 13px;
+  border-radius: 0;
+  border: 0;
+  background-color: #dfdfdf;
+  color: #b1b1b1;
+  cursor: pointer;
+  position: relative;
+}
+
+.ava-toast {
+  position: fixed;
+  box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+}
+
+.ava-toast svg {
+  width: 30px;
+  height: 30px;
+}
+
+.ava-toast .ava-alert__icon {
+  padding: 0 10px;
+  box-shadow: none;
+}
+
+.ava-toast .ava-text-con {
+  width: 100%;
+}
+
+.ava-toast .ava-alert__btn {
+  margin: 0;
+}
+
+.ava-toast .ava-alert__text {
+  padding: 5px;
+  width: 100%;
+}
+
+.svg-box {
+  display: inline-block;
+  position: relative;
+  width: 150px;
+}
+
+.ava-text-con {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.green-stroke {
+  stroke: #ffffff;
+}
+
+.red-stroke {
+  stroke: #ffffff;
+}
+
+.yellow-stroke {
+  stroke: #ffffff;
+}
+
+.circular circle.path {
+  stroke-dasharray: 330;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  opacity: 0.4;
+  animation: 0.7s draw-circle ease-out;
+}
+
+/*------- Checkmark ---------*/
+.checkmark {
+  stroke-width: 6.25;
+  stroke-linecap: round;
+  position: absolute;
+  top: 56px;
+  left: 49px;
+  width: 52px;
+  height: 40px;
+}
+
+.checkmark path {
+  animation: 1s draw-check ease-out;
+}
+
+@keyframes draw-circle {
+  0% {
+    stroke-dasharray: 0, 330;
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  80% {
+    stroke-dasharray: 330, 330;
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes draw-check {
+  0% {
+    stroke-dasharray: 49, 80;
+    stroke-dashoffset: 48;
+    opacity: 0;
+  }
+  50% {
+    stroke-dasharray: 49, 80;
+    stroke-dashoffset: 48;
+    opacity: 1;
+  }
+  100% {
+    stroke-dasharray: 130, 80;
+    stroke-dashoffset: 48;
+  }
+}
+
+/*---------- Cross ----------*/
+.cross {
+  stroke-width: 6.25;
+  stroke-linecap: round;
+  position: absolute;
+  top: 54px;
+  left: 54px;
+  width: 40px;
+  height: 40px;
+}
+
+.cross .first-line {
+  animation: 0.7s draw-first-line ease-out;
+}
+
+.cross .second-line {
+  animation: 0.7s draw-second-line ease-out;
+}
+
+@keyframes draw-first-line {
+  0% {
+    stroke-dasharray: 0, 56;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 0, 56;
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dasharray: 56, 330;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes draw-second-line {
+  0% {
+    stroke-dasharray: 0, 55;
+    stroke-dashoffset: 1;
+  }
+  50% {
+    stroke-dasharray: 0, 55;
+    stroke-dashoffset: 1;
+  }
+  100% {
+    stroke-dasharray: 55, 0;
+    stroke-dashoffset: 70;
+  }
+}
+
+.alert-sign {
+  stroke-width: 6.25;
+  stroke-linecap: round;
+  position: absolute;
+  top: 40px;
+  left: 68px;
+  width: 15px;
+  height: 70px;
+  animation: 0.5s alert-sign-bounce cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.alert-sign .dot {
+  stroke: none;
+  fill: #ffffff;
+}
+
+@keyframes alert-sign-bounce {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* CSS to handle the hover effect */
+.block-4-image img {
+  transition: transform 0.3s ease;
+}
+
+.block-4-image img.hovered {
+  transform: translateX(20px);  /* Adjust the translation value as needed */
+}
+#imagestyle{
+  transform: scale(0.80);
+}
+#imagestyle:hover{
+  transform: scale(0.99);
+  transition: 0.5s;
+  overflow: hidden;
+}
+
+#catogory li{
+  cursor: pointer;
+ color: #7971ea; 
+ text-transform: capitalize;
+ 
+}
+#catogory li:hover{
+  cursor: pointer;
+  color:rgb(31, 0, 156);
+ 
+}
+#manux h3 {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+#manux2:hover{
+  cursor: pointer;
+  
+}
+</style>
+
+
+
+    <div class="bg-light py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-0"><a href="/index">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Shop</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-section">
+      <div class="container">
+
+        <div class="row mb-5">
+          <div class="col-md-9 order-2">
+
+            <div class="row">
+              <div class="col-md-12 mb-5">
+                <div class="float-md-left mb-4"><h2 class="text-black h5">Shop All</h2></div>
+                <div class="d-flex">
+                  <div class="dropdown mr-1 ml-md-auto">
+                    <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Latest
+                    </button>
+                    <div class="dropdown-menu" id="manux2" aria-labelledby="dropdownMenuOffset">
+                    
+                    </div>
+                  </div>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" id="dropdownMenuReference" data-toggle="dropdown">Reference</button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
+                      <a class="dropdown-item" href="/shop">Relevance</a>
+                      <h6 class="dropdown-item" id="atoz">Name, A to Z</h6>
+                      <h6 class="dropdown-item" id="sortedtotback">Name, Z to A</h6>
+                      <div class="dropdown-divider"></div>
+                      <h6 id="pricelowtohigh" class="dropdown-item">Price, low to high</h6>
+                      <h6 id="pricehightolow" class="dropdown-item">Price, high to low</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+         
+            <div id="manux" class="row mb-5">
+                 
+
+            </div>
+            <div class="row" data-aos="fade-up">
+              <div class="col-md-12 text-center">
+                <div class="site-block-27">
+                  <ul>
+                    <li><a href="#">&lt;</a></li>
+                    <li class="active"><span>1</span></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">&gt;</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3 order-1 mb-5 mb-md-0">
+            <div class="border p-4 rounded mb-4">
+              <h3 class="mb-3 h6 text-uppercase text-black d-block">Categories</h3>
+              <ul  class="list-unstyled mb-0 " id="catogory">
+              
+              </ul>
+            </div>
+
+
+
+            <div class="border p-4 rounded mb-4">
+              <div class="mb-4">
+                <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Price</h3>
+                
+                <div class="price">
+                  <input id="slide-ranger" type="range"  min="0" max="100" value="0">
+                   <span style="color: #7971ea;" class="priceval">  500</span>
+              </div>
+                </div>
+                
+
+
+
+              <div class="mb-4">
+                <h3 class="mb-3 h6 text-uppercase text-black d-block" >Size</h3>
+                <div id="size123">
+                    
+                </div>
+             
+              </div>
+
+              <div class="mb-4">
+                <h3 class="mb-3 h6 text-uppercase text-black d-block">Color</h3>
+                <a href="#" class="d-flex color-item align-items-center" >
+                  <span class="bg-danger color d-inline-block rounded-circle mr-2"></span> <span class="text-black">Red (2,429)</span>
+                </a>
+                <a href="#" class="d-flex color-item align-items-center" >
+                  <span class="bg-success color d-inline-block rounded-circle mr-2"></span> <span class="text-black">Green (2,298)</span>
+                </a>
+                <a href="#" class="d-flex color-item align-items-center" >
+                  <span class="bg-info color d-inline-block rounded-circle mr-2"></span> <span class="text-black">Blue (1,075)</span>
+                </a>
+                <a href="#" class="d-flex color-item align-items-center" >
+                  <span class="bg-primary color d-inline-block rounded-circle mr-2"></span> <span class="text-black">Purple (1,075)</span>
+                </a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="site-section site-blocks-2">
+                <div class="row justify-content-center text-center mb-5">
+                  <div class="col-md-7 site-section-heading pt-4">
+                    <h2>Categories</h2>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="">
+                    <a class="block-2-item" href="#">
+                      <figure class="image">
+                        <img src="/public/images/apostolos-vamvouras-IcKwz2E4xp8-unsplash.jpg" alt="" class="img-fluid">
+                      </figure>
+                      <div class="text">
+                        <span class="text-uppercase">Collections</span>
+                        <h3>Women</h3>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="100">
+                    <a class="block-2-item" href="#">
+                      <figure class="image">
+                        <img src="/public/images/pexels-olcay-ertem-10508388.jpg" alt="" class="img-fluid">
+                      </figure>
+                      <div class="text">
+                        <span class="text-uppercase">Collections</span>
+                        <h3>Children</h3>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="200">
+                    <a class="block-2-item" href="#">
+                      <figure class="image">
+                        <img src="/public/images/pexels-ray-piedra-1476209 (1).jpg" alt="" class="img-fluid">
+                      </figure>
+                      <div class="text">
+                        <span class="text-uppercase">Collections</span>
+                        <h3>Men</h3>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <footer class="site-footer border-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <div class="row">
+              <div class="col-md-12">
+                <h3 class="footer-heading mb-4">Navigations</h3>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <ul class="list-unstyled">
+                  <li><a href="#">Sell online</a></li>
+                  <li><a href="#">Features</a></li>
+                  <li><a href="#">Shopping cart</a></li>
+                  <li><a href="#">Store builder</a></li>
+                </ul>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <ul class="list-unstyled">
+                  <li><a href="#">Mobile commerce</a></li>
+                  <li><a href="#">Dropshipping</a></li>
+                  <li><a href="#">Website development</a></li>
+                </ul>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <ul class="list-unstyled">
+                  <li><a href="#">Point of sale</a></li>
+                  <li><a href="#">Hardware</a></li>
+                  <li><a href="#">Software</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
+            <h3 class="footer-heading mb-4">Promo</h3>
+            <a href="#" class="block-6">
+              <img src="/public/images/hero_1.jpg" alt="Image placeholder" class="img-fluid rounded mb-4">
+              <h3 class="font-weight-light  mb-0">Finding Your Perfect Shoes</h3>
+              <p>Promo from  nuary 15 &mdash; 25, 2019</p>
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="block-5 mb-5">
+              <h3 class="footer-heading mb-4">Contact Info</h3>
+              <ul class="list-unstyled">
+                <li class="address">203 Fake St. Mountain View, San Francisco, California, USA</li>
+                <li class="phone"><a href="tel://23923929210">+2 392 3929 210</a></li>
+                <li class="email">emailaddress@domain.com</li>
+              </ul>
+            </div>
+
+            <div class="block-7">
+              <form action="#" method="post">
+                <label for="email_subscribe" class="footer-heading">Subscribe</label>
+                <div class="form-group">
+                  <input type="text" class="form-control py-4" id="email_subscribe" placeholder="Email">
+                  <input type="submit" class="btn btn-sm btn-primary" value="Send">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="row pt-5 mt-5 text-center">
+          <div class="col-md-12">
+            <p>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" class="text-primary">Colorlib</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+          </div>
+          
+        </div>
+      </div>
+    </footer>
+  </div>
+
+
+
+
+
+
+
+<!-- 
+ how does it work ?
+     Add the CSS and JavaScript codes
+      to your document then 
+      call ava function like this =>
+      ava({
+        icon: string 'success' | 'danger' | 'info' | 'none' (defult is success),
+        text: string (alert text),
+        toast: bol true | false (defult is false) ,
+        progressBar: bol true | false (defult is true),
+        timer: int (defult is 4000),
+        btnText: string (Alert btn text Not Work For toast alerts),
+        direction: string 'rtl' | 'ltr' (defult is rtl only for toast),
+        position: string 'top-right' | 'top-left' | 'bottom-left' | 'bottom-right' (defult is top-right Only work for Toast alerts),
+      })
+
+      good luck =)
+ -->
+
+   
+   
+
+    <script>
+
+      
+        const ava = ({ icon = 'success', toast = false, progressBar = true, text = null, timer = 10000, btnText = 'Okay', direction = 'rtl', position = 'top-right' }) => {
+            const modal = document.createElement('section');
+            modal.setAttribute('class', 'ava-modal');
+            document.body.appendChild(modal);
+            const alert = document.createElement('div');
+            alert.setAttribute('class', 'ava-alert');
+            modal.appendChild(alert);
+            var avaIcon;
+            if (icon == 'success' && toast == false) {
+                avaIcon = `
+                <div class="ava-alert__icon" style="background: #438C5E;">
+                <div class="svg-box">
+                    <svg class="circular green-stroke">
+                    <circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="5" stroke-miterlimit="10"/>
+                </svg>
+                <svg class="checkmark green-stroke">
+                    <g transform="matrix(0.79961,8.65821e-32,8.39584e-32,0.79961,-489.57,-205.679)">
+                        <path class="checkmark__check" fill="none" d="M616.306,283.025L634.087,300.805L673.361,261.53"/>
+                    </g>
+                </svg>
+                </div>
+            </div>
+              `;
+
+            } else if (icon == 'info' && toast == false) {
+                avaIcon = `
+                <div class="ava-alert__icon" style="background: #434D8C;">
+                <div class="svg-box">
+                    <svg class="circular yellow-stroke">
+                        <circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="5"
+                            stroke-miterlimit="10" />
+                    </svg>
+                    <svg class="alert-sign yellow-stroke">
+                        <g transform="matrix(1,0,0,1,-615.516,-257.346)">
+                            <g transform="matrix(0.56541,-0.56541,0.56541,0.56541,93.7153,495.69)">
+                                <path class="line" d="M634.087,300.805L673.361,261.53" fill="none" />
+                            </g>
+                            <g transform="matrix(2.27612,-2.46519e-32,0,2.27612,-792.339,-404.147)">
+                                <circle class="dot" cx="621.52" cy="316.126" r="1.318" />
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+              `;
+
+            } else if (icon == 'danger' && toast == false) {
+                avaIcon = `
+                <div class="ava-alert__icon" style="background: #8C4343;">
+                <div class="svg-box">
+                    <svg class="circular red-stroke">
+                    <circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="5" stroke-miterlimit="10"/>
+                </svg>
+                <svg class="cross red-stroke">
+                    <g transform="matrix(0.79961,8.65821e-32,8.39584e-32,0.79961,-502.652,-204.518)">
+                        <path class="first-line" d="M634.087,300.805L673.361,261.53" fill="none"/>
+                    </g>
+                    <g transform="matrix(-1.28587e-16,-0.79961,0.79961,-1.28587e-16,-204.752,543.031)">
+                        <path class="second-line" d="M634.087,300.805L673.361,261.53"/>
+                    </g>
+                </svg>
+                </div>
+            </div>
+              `;
+
+            } else if (icon == 'info' && toast == true) {
+                avaIcon = `
+                    <div class="ava-alert__icon" style="background: #434D8C;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="8" stroke-dashoffset="8" d="M12 7V13"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="8;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>
+            </div>
+                    `;
+                btnText = '';
+            } else if (icon == 'success' && toast == true) {
+                avaIcon = `
+                    <div class="ava-alert__icon" style="background: #438C5E;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100px" height="50px" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="14" stroke-dashoffset="14" d="M8 12L11 15L16 10"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="14;0"/></path></g></svg>
+            </div>
+                    `;
+                btnText = '';
+            } else if (icon == 'danger' && toast == true) {
+                avaIcon = `
+                    <div class="ava-alert__icon" style="background: #8C4343;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="8" stroke-dashoffset="8" d="M12 12L16 16M12 12L8 8M12 12L8 16M12 12L16 8"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="8;0"/></path></g></svg>
+            </div>
+                    `;
+                btnText = '';
+            } else if (toast == true && icon == 'none') {
+                avaIcon = '';
+                btnText = '';
+            } else if (toast == false && icon == 'none') {
+                avaIcon = '';
+            }
+            document.querySelector('.ava-alert').innerHTML = `
+          ${avaIcon}
+<div class='ava-text-con'>
+            <p class="ava-alert__text">
+            ${text}
+            </p>
+            <button class="ava-alert__btn">${btnText}</button>
+        </div>
+            `;
+            var new_timer_format = '';
+            switch (timer) {
+                case 1000:
+                    new_timer_format = '1s';
+                    break;
+                case 2000:
+                    new_timer_format = '2s';
+                    break;
+                case 3000:
+                    new_timer_format = '3s';
+                    break;
+                case 4000:
+                    new_timer_format = '4s';
+                    break;
+                case 5000:
+                    new_timer_format = '5s';
+                    break;
+                case 6000:
+                    new_timer_format = '6s';
+                    break;
+                case 7000:
+                    new_timer_format = '7s';
+                    break;
+                case 8000:
+                    new_timer_format = '8s';
+                    break;
+                case 9000:
+                    new_timer_format = '9s';
+                    break;
+                case 10000:
+                    new_timer_format = '10s';
+                    break;
+                default:
+                    new_timer_format = '4s';
+            }
+            if (timer > 10000) {
+                timer = 4000;
+            }
+            if (toast == true) {
+                modal.style = 'background-color: rgba(0, 0, 0, 0);';
+                alert.classList.add('ava-toast');
+                if (progressBar == false) {
+                    document.querySelector('.ava-alert__btn').remove();
+                } else {
+                    document.querySelector('.ava-alert__btn').style = 'width: 100%; padding: 2px;'
+                }
+                switch (position) {
+                    case 'top-right':
+                        alert.style = `
+                    top: 10px;
+                    right: 10px;
+                    `;
+                        break;
+                    case 'top-left':
+                        alert.style = `
+                    top: 10px;
+                    left: 10px;
+                    `;
+                        break;
+                    case 'bottom-left':
+                        alert.style = `
+                        bottom: 10px;
+                        left: 10px;
+                    `;
+                        break;
+                    case 'bottom-right':
+                        alert.style = `
+                        bottom: 10px;
+                    right: 10px;
+                    `;
+                        break;
+                }
+            }
+            if (progressBar == true) {
+                const progressBar_el = document.createElement('div');
+                progressBar_el.setAttribute('class', 'ava-progress-bar');
+                document.querySelector('.ava-alert__btn').appendChild(progressBar_el);
+                document.querySelector('.ava-progress-bar').style = `
+                animation-duration: ${new_timer_format};
+        -webkit-animation-duration: ${new_timer_format};
+                `;
+            }
+
+            if (progressBar == true) {
+                setTimeout(() => {
+                    modal.remove();
+                    alert.remove();
+                }, timer);
+            } else if (progressBar == false && toast == true) {
+                setTimeout(() => {
+                    modal.remove();
+                    alert.remove();
+                }, timer);
+            }
+            if (direction == 'rtl' && toast == true) {
+                document.querySelector('.ava-modal > *').style.direction = 'rtl';
+                document.querySelector('.ava-modal > *').style.textAlign = 'right';
+                document.querySelector('.ava-alert__btn').style.direction = 'rtl';
+            } else if (direction == 'ltr' && toast == true) {
+                document.querySelector('.ava-modal > *').style.direction = 'ltr';
+                document.querySelector('.ava-modal > *').style.textAlign = 'left';
+                document.querySelector('.ava-alert__btn').style.direction = 'ltr';
+            } else {
+                document.querySelector('.ava-modal > *').style.textAlign = 'center';
+            }
+            document.querySelector('.ava-alert__btn').addEventListener('click', function () {
+                alert.remove();
+                modal.remove();
+            })
+            window.addEventListener('click', function (e) {
+                if (e.target == document.querySelector('.ava-modal')) {
+                    modal.remove();
+                    alert.remove();
+                }
+
+            })
+        }
+
+
+
+
+
+
+
+
+
+        function info() {
+            ava({
+                icon: 'info',
+                text: 'This is a Info Alert',
+                btnText: 'Okay',
+                progressBar: true,
+                toast: false,
+            });
+        }
+        function success() {
+            ava({
+                icon: 'success',
+                text: 'Product Added Succesfully',
+                btnText: 'Okay',
+                progressBar: true,
+                toast: false,
+            });
+        }
+        function danger() {
+            ava({
+                icon: 'danger',
+                text: 'This is a Danger Alert',
+                btnText: 'Okay',
+                progressBar: true,
+                toast: false,
+            });
+        }
+
+        function white() {
+            ava({
+                icon: 'none',
+                text: 'This is a Simple Alert',
+                btnText: 'Okay',
+                progressBar: true,
+                toast: false,
+                timer: 8000
+            });
+        }
+
+
+        function Toast_info() {
+            ava({
+                icon: 'info',
+                text: 'This is a Toast info Alert',
+                btnText: '',
+                progressBar: true,
+                toast: true,
+                position: 'top-right',
+                direction: 'ltr',
+                timer: 8000
+            });
+        }
+
+
+        function Toast_success() {
+            ava({
+                icon: 'success',
+                text: 'This is a Toast success Alert',
+                btnText: '',
+                progressBar: true,
+                toast: true,
+                position: 'top-right',
+                direction: 'ltr',
+                timer: 4000
+            });
+        }
+
+
+        function Toast_danger() {
+            ava({
+                icon: 'danger',
+                text: 'This is a Toast danger Alert',
+                btnText: '',
+                progressBar: true,
+                toast: true,
+                position: 'top-right',
+                direction: 'ltr',
+                timer: 4000
+            });
+        }
+
+        function Toast_white() {
+            ava({
+                icon: 'none',
+                text: 'This is a Toast simple Alert',
+                btnText: '',
+                progressBar: true,
+                toast: true,
+                position: 'top-right',
+                direction: 'ltr',
+                timer: 4000
+            });
+        }
+
+
+
+
+
+
+let timeoutId;
+
+function funchangeimage(event, image1, image2) {
+    const hoveredImage = event.target;
+  hoveredImage.src = "/public/uploads/" + image1;
+
+  // Change to image2 after 300ms
+  timeoutId = setTimeout(function() {
+    hoveredImage.src = "/public/uploads/" + image2;
+  }, 1000);
+}
+
+
+
+function resetImage(event,image) {
+  let hoveredImage = event.target;
+  clearInterval(timeoutId)
+  hoveredImage.src = "/public/uploads/" + image;
+  
+
+}
+
+
+    </script>

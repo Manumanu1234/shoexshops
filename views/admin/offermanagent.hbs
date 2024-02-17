@@ -1,0 +1,182 @@
+<head>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.7.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.7.0/dist/css/bootstrap.min.css"
+        integrity="...">
+
+    <script>
+        // Initialize popovers
+        $(document).ready(function () {
+            $('[data-toggle="popover"]').popover();
+        });
+
+        let copybtn = document.querySelector(".copybtn");
+
+
+        function copyIt() {
+            let copyInput = document.querySelector('#copyvalue');
+
+            copyInput.select();
+
+            document.execCommand("copy");
+
+            copybtn.textContent = "COPIED";
+        }
+
+    </script>
+</head>
+
+
+<body class="dashboard dashboard_1">
+    <div class="full_container">
+        <div class="inner_container">
+            <!-- Sidebar  --> <!-- right content -->
+            <div id="content">
+                <!-- topbar -->
+                <div class="topbar"></div>
+                <form action="/admin/offermanagement" method="post">
+                    <div style="border: 3px solid black; padding: 5px 20px 20px 20px;">
+                        <h1 style="text-align: center;">OFFERMANAGEMENT</h1>
+                        <label for="choosecatogory"
+                            style="text-align: center; text-transform: capitalize; margin-bottom: 10px;">Category</label>
+                        <select required class="form-control" name="catogory">
+                            {{#each cato}}
+                            <option value="{{this}}">{{this}}</option>
+                            {{/each}}
+                        </select>
+                        <br>
+                        <label for="discontprice" style="text-align: center; text-transform: capitalize;">Discount
+                            price</label>
+                        <input required type="text" name="discountprice" class="form-control" id="inputitem"
+                            placeholder="enter your discount percentage">
+                        <br>
+                        <button class="btn btn-success" type="submit">Confirm</button>
+                    </div>
+                </form>
+                <br>
+
+                <div class="row"> {{#each collecte2}}
+                    <div id="id-{{this.body}}" class="col-md-3 pl-5">
+                        <div class="card" style="width: 18rem;">
+                            <button onclick="removeoffer('{{this.body}}','{{this.price}}')"
+                                style="margin-top: 13px; left: 215px; position: absolute;" type="button"
+                                class="btn-close bt" aria-label="Close"></button>
+                            <img class="card-img-top"
+                                src="https://i.pinimg.com/originals/f0/d1/a4/f0d1a478f39716c2cb86eeb4607501d3.png"
+                                alt="Card image cap">
+                            <div class="card-body">
+                                <p
+                                    style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-weight: bolder;font-size: x-large; color: rgb(115, 191, 1);">
+                                    <b>Discount percentage</b> <span>%{{this.price}}</span>
+                                </p>
+                                <p
+                                    style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-weight: bolder; ;">
+                                    <b>Discount catogory</b> <span>{{this.body}}</span>
+                                </p>
+                                <p class="card-text"
+                                    style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+                                    Offer added</p>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+
+
+                <form action="/admin/couponmanagement" method="post">
+                    <div style="border: 3px solid black; padding: 5px 20px 20px 20px; margin-top: 20px;">
+                        <h1 style="text-align: center;">COUPOUN MANAGEMENT</h1>
+                        <label for="choosecatogory"
+                            style="text-align: center; text-transform: capitalize; margin-bottom: 10px;">add
+                            coupon</label>
+                        <input required type="text" name="couponcode" class="form-control" id="inputitem"
+                            placeholder="enter coupon code">
+                        <br>
+                        <label for="discontprice" style="text-align: center; text-transform: capitalize;">coupon
+                            price</label>
+                        <input required type="text" name="couponprice" class="form-control" id="inputitem"
+                            placeholder="enter coupon price">
+                        <br>
+                        <label for="discontprice" style="text-align: center; text-transform: capitalize;">Expire
+                            date</label>
+                        <input class="form-control" required type="datetime-local" id="appt" name="appt">
+                        <br>
+
+
+                        <button style="margin-top: 15px;" class="btn btn-success" type="submit">add coupon</button>
+                        <br>
+                    </div>
+                </form>
+                <br>
+
+                <!--coupon card -->
+                {{#if coupon}}
+
+                <div class="row">
+                     {{#each coupon}}
+                    <div class="col-md-4" style="margin-top: 20px;">
+                       
+                        <div style="width: 500px;  justify-content: left; ">
+                            <div style="width: 400px; height: 180px; border-radius: 5px; box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2); background-color: #fff; padding: 10px 10px; position: relative;"
+                                class="card">
+                                <div style="display: flex; justify-content: space-between; padding: 0 10px; align-items: center;"
+                                    class="main">
+                                    <div style="width: 100px; height: 100px;" class="co-img">
+                                        <img style="width: 100px; height: 100px;"
+                                            src="data:image/png;base64,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"
+                                            alt="" />
+                                    </div>
+                                    <div style="border-left: 5px dotted black; height: 100px; position: absolute; left: 40%;"
+                                        class="vertical"></div>
+                                    <div style="font-size: 25px; font-weight: bold; position: absolute; right: 10px; top: 5px; color: #565656; text-transform: uppercase;"
+                                        class="content h2">ShoeXshope</div>
+                                    <div style="font-size: 35px; font-weight: bold; margin-top: 6px; position: absolute; right: 10px; color: #565656;"
+                                        class="content h1">
+                                        ${{this.coupounprice}} <span style="font-size: 18px;">Coupon</span>
+                                    </div>
+
+                                    <div style="font-size: 16px; color: #696969; position: absolute; top: 90px; right: 10px;"
+                                        class="content p">Valid
+                                        till {{this.coupoundate}}</div>
+                                </div>
+                                <div style="display: flex; margin: 12px 0 -5px 0; height: 45px; border-radius: 4px; padding: 0 5px; border: 1px solid #e1e1e1;"
+                                    class="copy-button">
+                                    <input
+                                        style="width: 100%; height: 100%; border: none; outline: none; font-size: 15px;"
+                                        id="copyvalue" type="text" readonly value="{{this.coupouncode}}" />
+                                    <button
+                                        style="padding: 5px 20px; background-color: #dc143c; color: #fff; border: 1px solid transparent;"
+                                        onclick="copyIt()" class="copybtn">COPY</button>
+                                </div>
+
+                            </div>
+                        </div>
+                        
+
+                    </div>
+                    {{/each}}
+                </div>
+
+
+
+                {{/if}}
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</body>

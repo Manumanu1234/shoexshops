@@ -1,0 +1,86 @@
+<div style=" margin-top: 30px;" id="collapseExample">
+    <form action="/editadresspost/{{responseid}}" method="post">
+    <div class="container">
+        
+          <div class="form-group row">
+              <div class="col-md-12">
+                    <label for="c_fname" class="text-black">First Name <span class="text-danger">*</span></label>
+                    <input  type="text" required class="form-control" id="c_fname" value="{{adresssresolve.c_fname}}" name="c_fname">
+                </div>
+        </div>
+
+  <div class="form-group row">
+             <div class="col-md-12">
+                    <label for="c_lname" class="text-black">Last Name <span class="text-danger">*</span></label>
+                    <input type="text" value="{{adresssresolve.c_lname}}" required class="form-control" id="c_lname" name="c_lname">
+                </div>
+        </div>
+
+
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label for="c_companyname" class="text-black">Company Name </label>
+                <input type="text" value="{{adresssresolve.c_companyname}}" placeholder="optional" class="form-control" id="c_companyname" name="c_companyname">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label for="c_address" class="text-black">Address <span class="text-danger">*</span></label>
+                <input type="text" value="{{adresssresolve.c_address}}" required class="form-control" id="c_address" name="c_address"
+                    placeholder="Street address">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="text" name="streetadress" value="{{adresssresolve.streetadress}}" class="form-control" placeholder="Apartment, suite, unit etc. (optional)">
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label for="c_state_country" class="text-black">State / Country <span
+                        class="text-danger">*</span></label>
+                <div class="form-group">
+                    <select required value="{{adresssresolve.stateorcountry}}" name="stateorcountry" id="c_country" class="form-control">
+                        <option value="1">Select a country</option>
+                        <option value="bangladesh">bangladesh</option>
+                        <option value="Algeria">Algeria</option>
+                        <option value="Afghanistan">Afghanistan</option>
+                        <option value="Ghana">Ghana</option>
+                        <option value="Albania">Albania</option>
+                        <option value="Bahrain">Bahrain</option>
+                        <option value="Colombia">Colombia</option>
+                        <option value="Dominican">Dominican Republic</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="c_postal_zip" class="text-black">Postoffice <span class="text-danger">*</span></label>
+                <input type="text" value="{{adresssresolve.c_postal_zip}}" required class="form-control" id="c_postal_zip" name="c_postal_zip">
+            </div>
+        </div>
+
+        <div class="form-group row mb-5">
+            <div class="col-md-6">
+                <label for="c_email_address" class="text-black">Email Address <span class="text-danger">*</span></label>
+                <input type="text" value="{{adresssresolve.c_email_address}}" required class="form-control" id="c_email_address" name="c_email_address">
+            </div>
+            <div class="col-md-6">
+                <label for="c_phone" class="text-black">Phone <span class="text-danger">*</span></label>
+                <input type="text" value="{{adresssresolve.c_phone}}" required class="form-control" id="c_phone" name="c_phone" placeholder="Phone Number">
+            </div>
+        </div>
+
+        <button style="float: right;" class="btn btn-primary " type="submit">Edit Adress</button>
+    </div>
+
+
+    </form>
+
+
+
+</div>
+
+
+
+</div>

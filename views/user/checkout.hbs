@@ -1,0 +1,371 @@
+<div class="bg-light py-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 mb-0"><a href="/index">Home</a> <span class="mx-2 mb-0">/</span> <a
+          href="/carthtml">Cart</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Checkout</strong></div>
+    </div>
+  </div>
+</div>
+
+<div class="site-section">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-md-12">
+        <label class="text-black h4" for="coupon">Coupon</label>
+        <p>Enter your coupon code if you have one.</p>
+      </div>
+      <div class="col-md-6 mb-3 mb-md-0">
+        <input type="text" class="form-control py-3" id="cpcode" placeholder="Coupon Code" style="width: 100%;">
+      </div>
+      <div class="col-md-6">
+        <button onclick="couponchecking('{{userid}}')" class="btn btn-primary btn-sm">Apply Coupon</button>
+      </div>
+      <p id="cpnot" style="color: red;" hidden>coupon is not find </p>
+    </div>
+
+
+
+
+
+    <div class="row">
+      <div class="col-md-6 mb-5 mb-md-0">
+        <h2 class="h3 mb-3 text-black">Billing Details</h2>
+        <div class="p-3 p-lg-5 border">
+
+          <form action="/userprofile1" method="post">
+
+            {{#if totaladressfail}}
+            {{#each adress}}
+            <input type="radio"  name="same" id="istelem-{{this._id}}"
+    
+              onclick="toggleAddressDetails(event,'{{this._id}}', '{{this.c_fname}}', '{{this.c_lname}}', '{{this.c_address}}', '{{this.c_phone}}', '{{this.c_email_address}}')">
+             
+            <label for="" class="text-dark ml-2">{{this.c_fname}} {{this.c_lname}},{{this.c_address}}</label>
+            <span><i onclick="hoverarrowclicked('{{this._id}}')" style="float: right; cursor: pointer; font-size: 25px;"
+                class="icon-angle-down"></i></span>
+            <br>
+
+
+            <div style="display: none; margin-top: 5pxpx; margin-bottom: 15px;" id="adress-{{this._id}}">
+              <p style="padding-left: 10px; padding:0px; margin-bottom: 0px;" class="text-dark ml-4">Name:
+                {{this.c_fname}} {{this.c_lname}}</p>
+              <p style="padding-left: 10px; padding:0px; margin-bottom: 0px;" class="text-dark ml-4">Address:
+                {{this.c_address}}</p>
+              <p style="padding-left: 10px;padding:0px; margin-bottom: 0px;" class="text-dark ml-4"> Number:
+                {{this.c_phone}} </p>
+              <p style="padding-left: 10px;padding:0px; margin-bottom: 0px;" class="text-dark ml-4">Email:
+                {{this.c_email_address}} </p>
+              <br>
+              <a style="width: 100%;" href="/edituseradress/{{this._id}}" class="btn btn-warning">Edit Address</a>
+              <br>
+            </div>
+
+
+
+
+            {{/each}}
+            {{/if}}
+
+            <button onclick="fun()" class="btn btn-primary" style="width: 100%; margin-top: 20px;"> add address</button>
+
+
+
+
+            <div style="display: none; margin-top: 30px;" id="collapseExample">
+              <div class="form-group row">
+                <div class="col-md-6">
+                  <label for="c_fname" class="text-black">First Name <span class="text-danger">*</span></label>
+                  <input type="text" required class="form-control" id="c_fname" name="c_fname">
+                </div>
+                <div class="col-md-6">
+                  <label for="c_lname" class="text-black">Last Name <span class="text-danger">*</span></label>
+                  <input type="text" required class="form-control" id="c_lname" name="c_lname">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-md-12">
+                  <label for="c_companyname" class="text-black">Company Name </label>
+                  <input type="text" placeholder="optional" class="form-control" id="c_companyname"
+                    name="c_companyname">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-md-12">
+                  <label for="c_address" class="text-black">Address <span class="text-danger">*</span></label>
+                  <input type="text" required class="form-control" id="c_address" name="c_address"
+                    placeholder="Street address">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <input type="text" name="streetadress" class="form-control"
+                  placeholder="Apartment, suite, unit etc. (optional)">
+              </div>
+
+              <div class="form-group row">
+                <div class="col-md-6">
+                  <label for="c_state_country" class="text-black">State / Country <span
+                      class="text-danger">*</span></label>
+                  <div class="form-group">
+                    <select required name="stateorcountry" id="c_country" class="form-control">
+                      <option value="1">Select a country</option>
+                      <option value="bangladesh">bangladesh</option>
+                      <option value="Algeria">Algeria</option>
+                      <option value="Afghanistan">Afghanistan</option>
+                      <option value="Ghana">Ghana</option>
+                      <option value="Albania">Albania</option>
+                      <option value="Bahrain">Bahrain</option>
+                      <option value="Colombia">Colombia</option>
+                      <option value="Dominican">Dominican Republic</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label for="c_postal_zip" class="text-black">Postoffice <span class="text-danger">*</span></label>
+                  <input type="text" required class="form-control" id="c_postal_zip" name="c_postal_zip">
+                </div>
+              </div>
+
+              <div class="form-group row mb-5">
+                <div class="col-md-6">
+                  <label for="c_email_address" class="text-black">Email Address <span
+                      class="text-danger">*</span></label>
+                  <input type="text" required class="form-control" id="c_email_address" name="c_email_address">
+                </div>
+                <div class="col-md-6">
+                  <label for="c_phone" class="text-black">Phone <span class="text-danger">*</span></label>
+                  <input type="text" required class="form-control" id="c_phone" name="c_phone"
+                    placeholder="Phone Number">
+                </div>
+              </div>
+
+              <button style="float: right;" class="btn btn-primary " type="submit">Save</button>
+            </div>
+
+
+          </form>
+
+
+
+        </div>
+      </div>
+      <div class="col-md-6">
+
+
+
+        <div class="row mb-5">
+          <div class="col-md-12">
+            <h2 class="h3 mb-3 text-black">Your Order</h2>
+            <div class="p-3 p-lg-5 border">
+              <table class="table site-block-order-table mb-5">
+                <thead>
+                  <th>Product</th>
+                  <th>Total</th>
+                </thead>
+                <tbody>
+                  {{#each totalproduct}}
+                  <tr>
+                    <td>{{this.name}}<strong class="mx-2">x</strong>{{this.quntity}}</td>
+                    <td>${{this.total}}</td>
+                  </tr>
+                  {{/each}}
+                  <tr hidden id="cpap">
+                    <td class="text-warning font-weight-bold"><strong>coupon applied</strong></td>
+                    <td id="cpapval" class="text-warning">-$</td>
+                    <td hidden id="hiddencouponsum">0</td>
+                  </tr>
+                  <tr>
+                    <td class="text-black font-weight-bold"><strong>Cart Subtotal</strong></td>
+                    <td class="text-black">${{totalprice}}</td>
+                  </tr>
+                  <tr>
+                    <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
+                    <td id="totalcart" class="text-black font-weight-bold">${{totalprice}}</td>
+                     <td id="totalcart1" class="text-black font-weight-bold" hidden>0</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="border p-3 mb-3">
+                <button
+                  onclick="cashondeleivery('{{totalprice}}','{{totalproduct}}','{{userid}}','{{adress}}','{{totaladressfail}}')"
+                  class="btn  d-block"
+                  style="color: rgb(57, 78, 199); background-color: transparent; width: 440px; height: 65px;"> Cash On
+                  Delivery</button>
+
+
+                <div class="collapse" id="collapsebank">
+                  <div class="py-2">
+                    <p class="mb-0">Make your payment directly into our bank account. Please use your Order ID as the
+                      payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="border p-0 mb-3">
+                <button
+                  onclick="razopayment('{{totalprice}}','{{totalproduct}}','{{userid}}','{{adress}}','{{totaladressfail}}')"
+                  class="btn  d-block"
+                  style="color: rgb(57, 78, 199); background-color: transparent; width: 440px; height: 65px;">
+                  Razorpay</button>
+
+                <div class="collapse" id="collapsecheque">
+                  <div class="py-2">
+                    <p class="mb-0">Make your payment directly into our bank account. Please use your Order ID as the
+                      payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="border p-3 mb-5">
+                <button
+                  onclick="paypalpayment('{{totalprice}}','{{totalproduct}}','{{userid}}','{{adress}}','{{totaladressfail}}')"
+                  class="btn  d-block"
+                  style="color: rgb(57, 78, 199); background-color: transparent; width: 440px; height: 65px;">
+                  Paypal</button>
+
+                <div class="collapse" id="collapsepaypal">
+                  <div class="py-2">
+                    <p class="mb-0">Make your payment directly into our bank account. Please use your Order ID as the
+                      payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
+                  </div>
+                </div>
+              </div>
+
+              <p id="idscomming" hidden></p>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- </form> -->
+  </div>
+</div>
+
+<footer class="site-footer border-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 mb-5 mb-lg-0">
+        <div class="row">
+          <div class="col-md-12">
+            <h3 class="footer-heading mb-4">Navigations</h3>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <ul class="list-unstyled">
+              <li><a href="#">Sell online</a></li>
+              <li><a href="#">Features</a></li>
+              <li><a href="#">Shopping cart</a></li>
+              <li><a href="#">Store builder</a></li>
+            </ul>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <ul class="list-unstyled">
+              <li><a href="#">Mobile commerce</a></li>
+              <li><a href="#">Dropshipping</a></li>
+              <li><a href="#">Website development</a></li>
+            </ul>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <ul class="list-unstyled">
+              <li><a href="#">Point of sale</a></li>
+              <li><a href="#">Hardware</a></li>
+              <li><a href="#">Software</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
+        <h3 class="footer-heading mb-4">Promo</h3>
+        <a href="#" class="block-6">
+          <img src="/public/images/hero_1.jpg" alt="Image placeholder" class="img-fluid rounded mb-4">
+          <h3 class="font-weight-light  mb-0">Finding Your Perfect Shoes</h3>
+          <p>Promo from nuary 15 &mdash; 25, 2019</p>
+        </a>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="block-5 mb-5">
+          <h3 class="footer-heading mb-4">Contact Info</h3>
+          <ul class="list-unstyled">
+            <li class="address">203 Fake St. Mountain View, San Francisco, California, USA</li>
+            <li class="phone"><a href="tel://23923929210">+2 392 3929 210</a></li>
+            <li class="email">emailaddress@domain.com</li>
+          </ul>
+        </div>
+
+        <div class="block-7">
+          <form action="#" method="post">
+            <label for="email_subscribe" class="footer-heading">Subscribe</label>
+            <div class="form-group">
+              <input type="text" class="form-control py-4" id="email_subscribe" placeholder="Email">
+              <input type="submit" class="btn btn-sm btn-primary" value="Send">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="row pt-5 mt-5 text-center">
+      <div class="col-md-12">
+        <p>
+          <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+          Copyright &copy;
+          <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+          <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i
+            class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank"
+            class="text-primary">Colorlib</a>
+          <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+</div>
+
+<script>
+  function fun() {
+    const radioButtons = document.getElementsByName("same");
+    radioButtons.forEach(radio => {
+      radio.checked = false;
+    });
+    var element = document.getElementById("collapseExample");
+    element.style.display = "block";
+
+  }
+  function toggleAddressDetails(radio, addressId, fname, lname, address, phone, email) {
+    // Toggle the address form display based on radio button selection
+    console.log('Selected Address Details:');
+    console.log('Name:', fname, lname);
+    console.log('Address:', address);
+    console.log('Number:', phone);
+    console.log('Email:', email);
+    var idsCommingElement = document.getElementById("idscomming");
+    idsCommingElement.innerHTML = 'Name: ' + fname + ' ' + lname + '<br>' +
+      'Address: ' + address + '<br>' +
+      'Number: ' + phone + '<br>' +
+      'Email: ' + email;
+
+    const addressForm = document.getElementById("collapseExample");
+    addressForm.style.display = event.target.checked ? "none" : "block";
+  }
+
+  function hoverarrowclicked(id) {
+    let button = document.getElementById("adress-" + id).style.display
+    if (button == "none") {
+      document.getElementById("adress-" + id).style.display = "block"
+    } else {
+      document.getElementById("adress-" + id).style.display = "none"
+    }
+
+
+  }
+
+  document.getElementById("istelem").checked = true;
+
+
+
+</script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>

@@ -1,0 +1,296 @@
+  <style>
+  
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  width: 40%;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#okButton{
+  width: 300px;
+    margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  text-align: center;
+  width: 300px;
+  margin-bottom: 10px;
+}
+#cancelButton{
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  text-align: center;
+  width: 300px;
+}
+#okButton:hover{
+    background-color: red;
+}
+</style>
+
+  
+<head>
+   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+   
+
+    emailjs.init("RebuNHvsh7io2_0E-");  // Replace with your Email.js user ID
+
+function sendEmail() {
+  var message = document.getElementById("coupon123").value;
+  console.log(message)
+  emailjs.send("service_212xirq", "template_qekfjpc", {
+    to_email: "madhumanum8@gmail.com",
+    from_name: "user",
+    message: message
+  })
+  .then(function(response) {
+    console.log("Email sent successfully:", response);
+    alert("Mail sent successfully")
+      location.reload()
+
+    
+  }, function(error) {
+    console.error("Error sending email:", error);
+    alert("Error sending email");
+  });
+}
+
+  </script>
+</head>
+  
+  
+
+    <div class="bg-light py-3">
+      <div class="container">
+        
+        <div class="row">
+          <div class="col-md-12 mb-0"><a href="/index">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Cart</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-section">
+      <div class="container">
+        <div class="row mb-5">
+          <form class="col-md-12" method="post">
+            <div class="site-blocks-table">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th class="product-thumbnail">Image</th>
+                    <th class="product-name">Product</th>
+                    <th class="product-price">Price</th>
+                    <th class="product-quantity">Quantitys</th>
+                    <th class="product-total">Total</th>
+                    <th class="product-remove">Remove</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                   {{#each totalproduct}}
+                  <tr id="cartdelete-{{this.item}}">
+                  
+                    <td class="product-thumbnail">
+                      <img src="/public/uploads/{{this.images.[0]}}" alt="Image" class="img-fluid">
+                    </td>
+                    <td class="product-name">
+                      <h2 class="h5 text-black">{{this.name}}</h2>
+                    </td>
+                    <td>${{this.price}}</td>
+                    <td>
+                      <div class="input-group mb-3" style="max-width: 120px;">
+                        <div class="input-group-prepend">
+                          <button onclick="buttonincrement('{{this.item}}',-1,'{{this.price}}','{{this.quntity}}')" class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+                        </div>
+                        <input   type="text" class="form-control text-center" value="{{this.quntity}}" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                          <p  hidden id="{{this.item}}" >{{this.quntity}}</p>
+                        <div class="input-group-append">
+                          <button  onclick="buttonincrement('{{this.item}}',1,'{{this.price}}','{{this.quntity}}')" class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+                        </div>
+                      </div>
+
+                    </td>
+                 
+                        <td id="cartitemss-{{this.item}}">{{this.total}}</td>
+                  
+        
+                   
+                    <td><a href="#" onclick="removex(event,'{{this.item}}','{{this.name}}')" class="btn btn-primary btn-sm">X</a></td>
+                  </tr>
+                  {{/each}}
+           
+
+                </tbody>
+              </table>
+            </div>
+          </form>
+        </div>
+
+      
+
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row mb-5">
+              <div class="col-md-6 mb-3 mb-md-0">
+                <button onclick="updatecart()" class="btn btn-primary btn-sm btn-block">Update Cart</button>
+              </div>
+              <div class="col-md-6">
+               <a href="/shop" class="btn btn-outline-primary btn-sm btn-block" >Continue Shopping</a>
+              </div>
+            </div>
+
+
+
+            <div class="row">
+              <div class="col-md-12">
+                <label class="text-black h4" for="coupon">FeedBack</label>
+                <p>Enter your FeedBack of our product</p>
+              </div>
+              <div class="col-md-8 mb-3 mb-md-0">
+                <input  type="text" class="form-control py-3" id="coupon123" placeholder="feedback">
+              </div>
+              <div class="col-md-4">
+                <button onclick="sendEmail()" class="btn btn-primary btn-sm">Sent  <i class="icon icon-send" ></i></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 pl-5">
+            <div class="row justify-content-end">
+              <div class="col-md-7">
+                <div class="row">
+                  <div class="col-md-12 text-right border-bottom mb-5">
+                    <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <span class="text-black">Subtotal</span>
+                  </div>
+                 
+                  <div class="col-md-6 text-right">
+                    <strong id="subtotal" class="text-black">${{totalcart}}</strong>
+                  </div>
+                  
+                </div>
+                <div class="row mb-5">
+                  <div class="col-md-6">
+                    <span class="text-black">Total</span>
+                  </div>
+                  <div class="col-md-6 text-right">
+                    <strong id="total" class="text-black">${{totalcart}}</strong>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <button data-toggle="tooltip" data-placement="bottom" title="If you have any coupon  calculate in payment" class="btn btn-primary btn-lg py-3 btn-block" onclick="window.location='/checkout'">Proceed To Checkout</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <footer class="site-footer border-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <div class="row">
+              <div class="col-md-12">
+                <h3 class="footer-heading mb-4">Navigations</h3>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <ul class="list-unstyled">
+                  <li><a href="#">Sell online</a></li>
+                  <li><a href="#">Features</a></li>
+                  <li><a href="#">Shopping cart</a></li>
+                  <li><a href="#">Store builder</a></li>
+                </ul>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <ul class="list-unstyled">
+                  <li><a href="#">Mobile commerce</a></li>
+                  <li><a href="#">Dropshipping</a></li>
+                  <li><a href="#">Website development</a></li>
+                </ul>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <ul class="list-unstyled">
+                  <li><a href="#">Point of sale</a></li>
+                  <li><a href="#">Hardware</a></li>
+                  <li><a href="#">Software</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
+            <h3 class="footer-heading mb-4">Promo</h3>
+            <a href="#" class="block-6">
+              <img src="/public/images/hero_1.jpg" alt="Image placeholder" class="img-fluid rounded mb-4">
+              <h3 class="font-weight-light  mb-0">Finding Your Perfect Shoes</h3>
+              <p>Promo from  nuary 15 &mdash; 25, 2019</p>
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="block-5 mb-5">
+              <h3 class="footer-heading mb-4">Contact Info</h3>
+              <ul class="list-unstyled">
+                <li class="address">203 Fake St. Mountain View, San Francisco, California, USA</li>
+                <li class="phone"><a href="tel://23923929210">+2 392 3929 210</a></li>
+                <li class="email">emailaddress@domain.com</li>
+              </ul>
+            </div>
+
+            <div class="block-7">
+              <form action="#" method="post">
+                <label for="email_subscribe" class="footer-heading">Subscribe</label>
+                <div class="form-group">
+                  <input type="text" class="form-control py-4" id="email_subscribe" placeholder="Email">
+                  <input type="submit" class="btn btn-sm btn-primary" value="Send">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="row pt-5 mt-5 text-center">
+          <div class="col-md-12">
+            <p>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" class="text-primary">Colorlib</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+          </div>
+          
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <div id="customMessageModal" class="modal">
+                        <div class="modal-content">
+                            <p id="customMessageText">Are you sure to delete ?</p>
+                            <button id="okButton" class="btn btn-primary">Ok</button>
+                            <button id="cancelButton" class="btn btn-primary">Cancel</button>
+                        </div>
+                    </div>

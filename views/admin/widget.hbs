@@ -1,0 +1,128 @@
+ <style>
+    .centered  {
+      text-align: center; /* Center the content within the table cell */
+    }
+  </style>
+<body class="dashboard dashboard_1">
+
+    <div class="full_container">
+        <div class="inner_container">
+            <!-- Sidebar  --> <!-- right content -->
+            <div id="content">
+                <!-- topbar -->
+                <div class="topbar">
+
+                </div>
+
+            
+                
+
+                  
+                      <div class="mt-5" style="border: 3px solid black; border-radius: 0%; box-shadow: black;  padding: 20px;">
+                          <h2 class="text-center">OFFERS BANNER
+                      </h2>
+                    <br>
+                    <h4>Select image</h4>
+                    <br>
+                    <form action="/admin/offerwidget" method="post" enctype="multipart/form-data">
+                       
+                           <input onchange="fun(event)" type="file" name="updateimage" required id="">
+                           <br>
+                       <img  style=" width: 50%; height: 50%;" id="offerbanner" src=""  alt="">
+                       
+                    <br>
+                    <br>
+                    <button type="submit" class="btn btn-success">Upload</button> 
+                    </form>
+                    <br>
+                    <br>
+                    <table class="table text-center align-middle" id="myTable">
+                       <thead>
+                        <th>si</th>
+                        <th>images</th>
+                        <th>delelte button</th>
+                       </thead>
+                        <tbody>
+                            {{#each totalofferupdate}}
+                            
+                            <tr id="{{this._id}}" >
+                                <td scope="1">{{inc this.index}}</td>
+                            
+                                
+                                <td><img style="height:200px; width: 300px;" src="/public/upladbanner/{{this.nameimage}}" alt=""></td>
+                              
+                               <td><button class="btn btn-danger" onclick="removebanneroffers('{{this._id}}')" >Remove</button></td> 
+                            </tr>
+                            {{/each}}
+                        
+                        <tbody>
+                          
+
+
+
+
+                          
+                        </tbody>
+                    </table>
+                      </div>
+                     
+                   
+
+
+
+
+                     <div style="border: 3px solid black;" class="container   mt-5">
+                  <div >
+                        <h2 class="text-center" >SLIDER BANNER</h2>
+                    <br>
+                      <h4>Select image</h4>
+                    <br>
+                    <form action="/admin/widget" method="post" enctype="multipart/form-data">
+
+                          <input type="file" name="bannerimage" required id="">
+                    <br>
+                    <br>
+                    <button  class="btn btn-success" type="submit">Upload</button>
+                    </form>
+                    <br>
+                    <br>
+                    
+                  </div>
+                  
+
+                    <table class="table text-center align-middle" id="myTable">
+                       <thead>
+                        <th>si</th>
+                        <th>images</th>
+                        <th>delelte button</th>
+                       </thead>
+                        <tbody>
+                            {{#each totresponse}}
+                            
+                            <tr id="{{this._id}}" >
+                                <td scope="1">{{inc this.index}}</td>
+                            
+                                
+                                <td><img style="height:100px; width: 100px;" src="/public/upladbanner/{{this.bannerid}}" alt=""></td>
+                              
+                               <td><button class="btn btn-danger" onclick="removebanner('{{this._id}}')" >Remove</button></td> 
+                            </tr>
+                            {{/each}}
+                        
+                        <tbody>
+                          
+
+
+
+
+                          
+                        </tbody>
+                    </table>
+                 
+                 <script>
+                    function fun(event){
+                       let offerbanner= document.getElementById("offerbanner");
+                       offerbanner.src=URL.createObjectURL(event.target.files[0])
+
+                    }
+                 </script>

@@ -1,0 +1,133 @@
+<style>
+    .sc__wrapper {
+        display: block;
+        width: 100%;
+        height: 300px;
+        max-width: 300px;
+        margin: 0 auto;
+        border: 5px solid #fff;
+    }
+
+    .sc__container {
+        color: #fff;
+        margin-top: 60px;
+        position: relative;
+        overflow: hidden;
+        height: 300px;
+        max-width: 300px;
+    }
+
+    .sc__container>img {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+    }
+
+    .sc__container canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+    }
+
+    .inner_html {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: table;
+        background-image: linear-gradient(90deg, rgb(174, 137, 254) 0%, rgb(123, 69, 238) 100%);
+    }
+
+    .inner_html p {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold;
+        animation: pulse 0.5s ease-in-out infinite both;
+        -webkit-animation: pulse 0.5s ease-in-out infinite both;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.1);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+
+    }
+</style>
+
+<body>
+   
+
+    <div class="sc__wrapper">
+        <h1
+            style="text-align: center;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; color: #000000;">
+            Congratulations You got Scratch Card pleas scrach this!!!</h1>
+
+        <div id="js--sc--container" class="sc__container">
+
+        </div>
+    </div>
+
+  
+
+</body>
+
+
+<script src="https://unpkg.com/scratchcard-js"></script>
+<script>
+
+    const scContainer = document.getElementById('js--sc--container');
+    let x = Math.random() * 10;
+    x = Math.round(x);
+
+
+
+    const sc = new ScratchCard('#js--sc--container', {
+        scratchType: SCRATCH_TYPE.CIRCLE,
+        containerWidth: scContainer.offsetWidth,
+        containerHeight: 300,
+        imageForwardSrc: 'https://th.bing.com/th/id/OIP.NrYdnjvirGmRJycadjJCLwHaD4?rs=1&pid=ImgDetMain',
+        imageBackgroundSrc: '/scratch-image-1.png',
+        htmlBackground: `<div class="inner_html"><p>you got $ ${x} Rupees</p></div>`, // Include value of x dynamically
+        clearZoneRadius: 30,
+        nPoints: 50,
+        pointSize: 4,
+    });
+    let called = false;
+    sc.init().then(() => {
+        console.log("Scratch initialized successfully.");
+        sc.canvas.addEventListener('scratch.move', () => {
+            let percent = sc.getPercent().toFixed(0);
+            console.log("Scratched percentage:", percent);
+
+            if (percent > 50 && !called) { // Check if percentage exceeds 50% and function hasn't been called yet
+                console.log("Scratched more than 50%. Calling calllocation(x)...");
+                setTimeout(() => {
+                    calllocation(x);
+                }, 5000)
+                // Make sure `calllocation` is defined and `x` is appropriately set
+                called = true; // Set the flag to indicate that the function has been called
+                sc.canvas.removeEventListener('scratch.move');
+            }
+        });
+    }).catch((error) => {
+        console.error("Error initializing scratch:", error);
+        alert("Error initializing scratch: " + error.message);
+    });
+
+
+</script>

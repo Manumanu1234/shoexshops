@@ -1,0 +1,101 @@
+
+
+<body class="dashboard dashboard_1">
+    
+    <div class="full_container">
+        <div class="inner_container">
+            <!-- Sidebar  -->    <!-- right content -->
+            <div id="content">
+                <!-- topbar -->
+                  <div class="topbar">
+                   
+                </div>
+                <div class="row">
+                     <div class="col-md-12">
+
+                       <h1 style="float: left; margin-top: 20px;">Product Management</h1>
+                </div>
+                        
+                </div>
+                  
+              <br>
+              <div class="row">
+                 <div class="col-md-12">
+
+                <form action="/admin/addtoproductsubmint" method="post" enctype="multipart/form-data">
+
+                    <label for="Name">Product Name</label>
+                    <input required class="form-control" type="text" name="name" id="">
+                    <br>
+                    <label  for="price">Price</label>
+                    <input required class="form-control" type="text" name="price" id="">
+                    <br>
+                     <label  for="caotogry">Categories</label>
+                   <select required class="form-control" id="cars" name="catogory">
+                        <option value="Men">men</option>
+                        <option value="women">Women</option>
+                        <option value="children">children</option>
+                        
+                    </select>
+                    <br>
+                    <label for="discription">Discription</label>
+                    <input required class="form-control" type="text" name="discription">
+                    <br>
+                    <label for="gender" >Gender</label> <select required class="form-control" id="cars" name="gender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Transgender">Transegender</option>
+                        
+                    </select>
+                    <br>
+                    <label for="brand">Brand</label>
+                    <select required class="form-control"  id="" name="brand">
+                        <option value="Nike">Nike</option>
+                        <option value="Converse">Converse</option>
+                        <option value="New Balance">New Balance</option>
+                        <option value="Addidas">Addidas</option>
+                        <option value="bootshoe">Bootshoe</option>
+                        <option value="womenshoe">women</option>
+                        <option value="children">children</option>
+                    </select>
+                    <br>
+                    <label for="size">Size</label>
+                    <select required class="form-control"  id="" name="size">
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                        <option value="XXL">XXL</option>
+                    </select>
+                    <br>
+                    <label for="images">Main image</label>
+                    <br>
+                    <img style="width: 50px; height: 50px;" id="imageinaddproduct" src="" alt="">
+                    <input required class="form-control" type="file" onchange="imagefun(event)" name="imagename1">
+                    <br>
+                    <img style="width: 50px; height: 50px;" id="sideimages1" src="" alt="">
+                    <input required class="form-control" type="file" onchange="secimage(event)" name="imagename2">
+                    <br>
+                     <img style="width: 50px; height: 50px;" id="sideimages2" src="" alt="">
+                    <input required class="form-control" type="file" onchange="thirdimage(event)" name="imagename3">
+                    <br>
+                    <br>
+
+                   <button type="submit" class="btn btn-primary">submit</button>
+                  
+
+
+
+                </form>
+              </div>
+              
+            
+
+
+        </div>
+
+           </div>
+           </div>
+
+          
+           </body>
+
