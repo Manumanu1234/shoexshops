@@ -8,7 +8,10 @@ var db=require('./config/connection')
 var userRouter = require('./routes/users');
 var adminRouter = require('./routes/admin');
 var session=require("express-session")
- 
+ const hostname = '127.0.0.1'; // Your server ip address
+const port = 3000;
+
+const version = '1.0.0';
 var app = express();
 
 
@@ -67,6 +70,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
+app.listen(port, () => {
+    console.log(`[Version ${version}]: Server running at http://${hostname}:${port}/`);
+})
 module.exports = app;
 
